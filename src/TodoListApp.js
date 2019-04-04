@@ -30,8 +30,7 @@ class ToDoApp extends Component{
 todoItems.unshift({index: todoItems.length + 1,
    value: todoItem.newItemValue,
     done: false});
-    this.setState({todoItems : todoItems});
-    console.log(todoItem + "rrrr");
+    this.setState({todoItems : todoItems});   
   }
 
 removeItem(itemIndex){
@@ -48,7 +47,6 @@ markTodoDone(itemIndex){
 }
 
 render(){
-  console.log(this.addItem + "uuuuuu");
   return(
     <div id="main">
     <ToDoHeader></ToDoHeader>
@@ -106,9 +104,30 @@ class ToDoListItem extends Component{
   }
 
   render(){
+    const doneElem = () => { 
+        return(
+    <span class="icon has-text-success">
+    <i class="fas fa-check-square"></i>
+   </span>);
+
+  }
+
+  const doingElem = () => { 
+    return(
+<span class="icon has-text-danger">
+  <i class="fas fa-ban"></i>
+</span>);
+
+}
+
+
+
     let todoClass = this.props.item.done ? "done" : "undone";
     return(
      <li className="list-group-item">
+
+
+
      <div className={todoClass}>
        <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span>
        {this.props.item.value}
@@ -130,8 +149,7 @@ class ToDoForm extends Component{
     event.preventDefault();
 let newItemValue = this.refs.itemName.value;
 
-if(newItemValue){
-  console.log(newItemValue);
+if(newItemValue){ 
   this.props.addItem({newItemValue});
   this.refs.form.reset();
 }
@@ -146,8 +164,16 @@ componentDidMount(){
     return(
       //take class from bulma
       <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-        <input type="text" ref="itemName" placeholder="add new task..." className="orm-control"></input>
-        <button type="submit" className="button is-danger">Add</button>
+
+<div className="field has-addons">
+  <p class="control is-expanded">
+      
+        <input type="text" ref="itemName" placeholder="add new task..." className="input"></input>
+        </p>
+        <p class="control">
+        <button type="submit" className="button is-danger">Add</button>       
+        </p>
+        </div>
       </form>
     );
   }
