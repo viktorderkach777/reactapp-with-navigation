@@ -12,6 +12,9 @@ export default class TodoList extends Component {
   }
 }
 
+let displayTextDone = "Done";
+let displayTextDoing = "Doing";
+
 let todoItems = [];
 todoItems.push({index: 1, value: "to do all hometasks for React/Angular course", done: false});
 todoItems.push({index: 2, value: "make peace in a whole world", done: false});
@@ -43,6 +46,7 @@ markTodoDone(itemIndex){
   let task = todoItems[itemIndex];
   todoItems.splice(itemIndex, 1);
   task.done = !task.done;
+  //task.displayText =  task.done ? "Done":"Doing";
   task.done ? todoItems.push(task) : todoItems.unshift(task);
   this.setState({todoItems : todoItems});  
 }
@@ -118,9 +122,10 @@ class ToDoListItem extends Component{
   }
 
   onClickDone(){
+    
     let index = parseInt(this.props.index);
     this.props.markTodoDone(index);
-    console.log(this.value);
+    // console.log(event.target.innerText);
     // if (this.value=="Close") this.value = "Open";
     // else this.value = "Close";
   }
@@ -155,7 +160,7 @@ class ToDoListItem extends Component{
        {/* <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span> */}
        <span className="control">
     <a className="button is-link is-hovered" onClick={this.onClickDone}>
-      Open
+      {this.props.item.done ? displayTextDone: displayTextDoing}
     </a>
   </span>
 
@@ -193,7 +198,20 @@ componentDidMount(){
     return(
       //take class from bulma
       <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-
+<div>
+<span className="icon has-text-info">
+  <i className="fas fa-info-circle"></i>
+</span>
+<span className="icon has-text-success">
+  <i className="fas fa-check-square"></i>
+</span>
+<span className="icon has-text-warning">
+  <i className="fas fa-exclamation-triangle"></i>
+</span>
+<span className="icon has-text-danger">
+  <i className="fas fa-ban"></i>
+</span>
+  </div>
 <div className="field has-addons">
   <p className="control is-expanded">
       
