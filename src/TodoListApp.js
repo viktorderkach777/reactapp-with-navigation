@@ -92,17 +92,30 @@ class ToDoList extends Component{
 
 class DoneIcon extends Component{
   render(){
-    return <span className="icon has-text-success">
+    return (<span className="icon has-text-success">
     <i className="fas fa-check-square"></i>
-   </span>
+   </span>)
   }
 }
 
 class DoingIcon extends Component{
   render(){
-    return <span className="icon has-text-danger">
+    return (<span className="icon has-text-danger">
     <i className="fas fa-ban"></i>
-  </span>
+  </span>)
+  }
+}
+
+class Icon extends Component{
+  // constructor(props){
+  //   super(props);
+  //   this.state = {taskStatus: this.props.status}   
+  // }
+
+  render(){
+    if(this.props.status)
+    return (<DoneIcon/>)
+    return (<DoingIcon/>)
   }
 }
 
@@ -152,7 +165,7 @@ class ToDoListItem extends Component{
     let todoClass = this.props.item.done ? "done notification is-primary" : "undone notification is-danger";
     return(
      <li className="list-group-item">
- {/* <DoingIcon></DoingIcon> */}
+ 
      <div className={todoClass} >
      {/* <div class="notification is-primary">
   
@@ -160,7 +173,10 @@ class ToDoListItem extends Component{
        {/* <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span> */}
        <span className="control">
     <a className="button is-link is-hovered" onClick={this.onClickDone}>
-      {this.props.item.done ? displayTextDone: displayTextDoing}
+    {/* <DoingIcon></DoingIcon> */}
+    <Icon status={this.props.item.done }></Icon>
+      {/* {this.props.item.done ? displayTextDone: displayTextDoing} */}
+      {/* {this.props.item.done ? {DoingIcon}: {DoneIcon}} */}
     </a>
   </span>
 
