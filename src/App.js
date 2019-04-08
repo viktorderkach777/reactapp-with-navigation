@@ -27,7 +27,7 @@ class App extends Component {
        </ul>   
 
 {/*define block with exact for predefined routes */}
-       <div class="container"> </div>
+       <div className="container"> </div>
        <Route exact path="/" component={Home}></Route>
        <Route path="/weather" component={Weather}></Route>
        <Route path="/star-wars" component={StarWars}></Route>

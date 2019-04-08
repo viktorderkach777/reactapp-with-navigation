@@ -45,6 +45,8 @@ ul.header li a:hover{
 }
 
 .content{
+  width: 80%;
+  margin: auto;
   background-color: whitesmoke;
   padding: 20px;
 }

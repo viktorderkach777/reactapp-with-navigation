@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import 'bulma/css/bulma.css'
 import './App.css';
 
 export default class TodoList extends Component {
@@ -85,6 +86,23 @@ class ToDoList extends Component{
   }
 }
 
+class DoneIcon extends Component{
+  render(){
+    return <span className="icon has-text-success">
+    <i className="fas fa-check-square"></i>
+   </span>
+  }
+}
+
+class DoingIcon extends Component{
+  render(){
+    return <span className="icon has-text-danger">
+    <i className="fas fa-ban"></i>
+  </span>
+  }
+}
+
+
 class ToDoListItem extends Component{
   constructor(props){
     super(props);
@@ -96,11 +114,15 @@ class ToDoListItem extends Component{
   onClickClose(){
     let index = parseInt(this.props.index);
     this.props.removeItem(index);
+    
   }
 
   onClickDone(){
     let index = parseInt(this.props.index);
     this.props.markTodoDone(index);
+    console.log(this.value);
+    // if (this.value=="Close") this.value = "Open";
+    // else this.value = "Close";
   }
 
   render(){
@@ -122,16 +144,23 @@ class ToDoListItem extends Component{
 
 
 
-    let todoClass = this.props.item.done ? "done" : "undone";
+    let todoClass = this.props.item.done ? "done notification is-primary" : "undone notification is-danger";
     return(
      <li className="list-group-item">
+ {/* <DoingIcon></DoingIcon> */}
+     <div className={todoClass} >
+     {/* <div class="notification is-primary">
+  
+</div> */}
+       {/* <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span> */}
+       <span className="control">
+    <a className="button is-link is-hovered" onClick={this.onClickDone}>
+      Open
+    </a>
+  </span>
 
-
-
-     <div className={todoClass}>
-       <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span>
        {this.props.item.value}
-       <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
+       <button type="button" className="delete" onClick={this.onClickClose}>&times;</button>
      </div>
       </li>
     );
@@ -166,11 +195,11 @@ componentDidMount(){
       <form ref="form" onSubmit={this.onSubmit} className="form-inline">
 
 <div className="field has-addons">
-  <p class="control is-expanded">
+  <p className="control is-expanded">
       
         <input type="text" ref="itemName" placeholder="add new task..." className="input"></input>
         </p>
-        <p class="control">
+        <p className="control">
         <button type="submit" className="button is-danger">Add</button>       
         </p>
         </div>
